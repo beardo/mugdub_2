@@ -29,6 +29,7 @@ class FacesController < ApplicationController
   # POST /faces.json
   def create
     @face = Face.new(face_params)
+    @face.user = current_user
 
     respond_to do |format|
       if @face.save
