@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @guess.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @guess.longitude %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @guess.name %>
+</p>
+
+<p>
+  <strong>Face:</strong>
+  <%= @guess.face %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @guess.user %>
+</p>
+
+<%= link_to 'Edit', edit_guess_path(@guess) %> |
+<%= link_to 'Back', guesses_path %>
