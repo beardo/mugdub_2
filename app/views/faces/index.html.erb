@@ -1,27 +1,36 @@
-<h1>Listing faces</h1>
-
-<table>
+<%- model_class = Face -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Face %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Image</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @faces.each do |face| %>
       <tr>
+        <td><%= face.id %></td>
         <td><%= face.image %></td>
-        <td><%= face.user %></td>
-        <td><%= link_to 'Show', face %></td>
-        <td><%= link_to 'Edit', edit_face_path(face) %></td>
-        <td><%= link_to 'Destroy', face, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l face.created_at, format: :long %></td>
+        <td>
+          <%= link_to face_path(face), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to face_path(face), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Face', new_face_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_face_path,
+            :class => 'btn btn-primary' %>
